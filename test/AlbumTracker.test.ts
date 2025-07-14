@@ -27,6 +27,9 @@ describe("AlbumTracker", function() {
     const album = Album__factory.connect(expectedAlbumAddr, buyer);
 
     expect(await album.price()).to.eq(albumPrice);
+    expect(await album.title()).to.eq(albumTitle);
+    expect(await album.purchased()).to.be.false;
+    expect(await album.purchased()).to.eq(0);
   });
 
   it("creates albums", async function() {
