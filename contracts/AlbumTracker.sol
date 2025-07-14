@@ -26,7 +26,7 @@ contract AlbumTracker is Ownable {
 
   constructor() Ownable(msg.sender) {}
 
-  function createAlbum(uint256 _price, string memory _title) public onlyOwner {
+  function createAlbum(uint256 _price, string memory _title) public {
     Album newAlbum = new Album(_price, _title, currentIndex, this);
 
     albums[currentIndex].album = newAlbum;
