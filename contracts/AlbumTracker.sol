@@ -22,7 +22,7 @@ contract AlbumTracker is Ownable {
   );
 
   mapping(uint => AlbumProduct) public albums;
-  uint currentIndex;
+  uint public currentIndex;
 
   constructor() Ownable(msg.sender) {}
 

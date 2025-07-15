@@ -29,11 +29,24 @@ describe("AlbumTracker", function() {
     expect(await album.price()).to.eq(albumPrice);
     expect(await album.title()).to.eq(albumTitle);
     expect(await album.purchased()).to.be.false;
-    expect(await album.purchased()).to.eq(0);
+    // expect(await album.purchased()).to.eq(0);
   });
 
   it("creates albums", async function() {
-    loadFixture(deploy);
+    const { tracker } = await loadFixture(deploy);
+
+    const albumTitle = "Enchantment of the Ring";
+    const albumPrice = ethers.parseEther("0.00005");
+
+    await createAlbum(tracker, albumTitle, albumPrice);
+
+    const album = await tracker.albums(0);
+
+    expect(album.title).to.eq(albumTitle);
+    expect(album.price).to.eq(albumPrice);
+    expect(album.state).to.eq(0);
+
+    expect(await tracker.currentIndex()).to.eq(1);
   });
 
   async function precomputeAddress(sc: BaseContract, nonce = 1): Promise<string> {
