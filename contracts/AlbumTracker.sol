@@ -15,9 +15,10 @@ contract AlbumTracker is Ownable {
   }
 
   event AlbumStateChanged(
+    address indexed _albumAddress,
     uint256 _albumIndex, 
     uint256 _stateNum, 
-    address _albumAddress,
+    
     string _albumTitle
   );
 
@@ -35,9 +36,9 @@ contract AlbumTracker is Ownable {
     albums[currentIndex].title = _title;
 
     emit AlbumStateChanged(
+      address(newAlbum),
       currentIndex, 
       uint256(albums[currentIndex].state), 
-      address(newAlbum),
       _title
     );
 
@@ -51,9 +52,10 @@ contract AlbumTracker is Ownable {
     albums[_index].state = AlbumState.Paid;
 
     emit AlbumStateChanged(
+      address(albums[_index].album),
       _index, 
       uint256(albums[_index].state), 
-      address(albums[_index].album),
+      
       albums[_index].title
     );
   }
@@ -64,9 +66,10 @@ contract AlbumTracker is Ownable {
     albums[_index].state = AlbumState.Delivered;
 
     emit AlbumStateChanged(
+      address(albums[_index].album),
       _index, 
       uint256(albums[_index].state), 
-      address(albums[_index].album),
+      
       albums[_index].title
     );
 
